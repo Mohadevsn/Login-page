@@ -71,7 +71,6 @@ if (isset($_POST['submit'])) {
             <input type="email" name="email" class="login-input ">
             <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password" class="login-input ">
-            <input type="checkbox" name="showpasswd" id="showpasswd" onclick="showpassd()"><label>Voir mot de passe</label><br>
             <label for="conf-password">Confirmation de mot de passe</label>
             <input type="password" name="conf_password" class="login-input ">
 
@@ -80,7 +79,17 @@ if (isset($_POST['submit'])) {
 
         </form>
     </div>
+
+    <footer>
+    <?php
+            $myname = "Mohamed Wade";
+            $thisYear = date('Y');
+            echo "$myname &copy $thisYear";
+        ?>
+    </footer>
+        
+</body>
     
-    <script type="text/javascript" src="scripts.js"></script></body>
+    <script type="text/javascript" src="scripts.js"></script>
 </html>
 

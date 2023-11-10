@@ -82,6 +82,10 @@ body, html {
   margin: 10px;
 }
 
+footer{
+  text-align: center;
+  border: solid 1px black;
+}
 
   
   
