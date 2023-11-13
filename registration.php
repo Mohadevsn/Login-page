@@ -1,5 +1,6 @@
 <?php
-    define("TITLE", "Registration")
+    define("TITLE", "Registration");
+    session_start();
 ?>
 
 
@@ -16,15 +17,16 @@
     <?php
 if (isset($_POST['submit'])) {
     $fullname = $_POST['fullname'];
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $passwd = $_POST['password'];
     $hashed_passwd = password_hash($passwd, PASSWORD_DEFAULT);
     $conf_password = $_POST['conf_password'];
-    $id = 1;
+    
 
     $errors = array();
 
-    if (empty($fullname) || empty($email) || empty($passwd) || empty($conf_password)) {
+    if (empty($fullname) || empty($username)|| empty($email) || empty($passwd) || empty($conf_password)) {
         array_push($errors, "Tous les champs ne sont pas remplis");
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -44,49 +46,66 @@ if (isset($_POST['submit'])) {
     
         // Create a connection
         $serveurname = "localhost";
-        $username = "root";
+        $login = "root";
         $password = "root";
 
         try{
-            $conn = new PDO("mysql:host=$serveurname;dbname=login-register", $username, $password);
+            $conn = new PDO("mysql:host=$serveurname;dbname=login-register", $login, $password);
 
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            $sql = "INSERT INTO users (fullname, email, passwd) VALUES('$fullname', '$email', '$hashed_passwd');";
 
-            $conn->exec($sql);
-            echo "Recorded succefully";
+            $stmt = $conn->prepare("SELECT * from users WHERE username = ?");
+            $stmt->execute([$_POST["username"]]);
+            
+            $user = $stmt->fetch();
+            if($user){
+                array_push($errors, "Username already exist!!");
+                foreach ($errors as $error) {
+                    echo "<div class=\"error\">$error</div>";
+                }
+            }
+            else{
+                $sql = "INSERT INTO users (fullname, username, email, passwd) VALUES('$fullname', '$username', '$email', '$passwd');";
+                $conn->exec($sql);
+                $_SESSION['fullname'] = $fullname;
+                $_SESSION['email'] = $email;
+                header('Location: index.php'); 
+                exit();
+            }
+            
+            
         }catch(PDOExeption $e){
             echo "Connection failed". $e->getMessage();
+        }finally{
+            $conn = null;
         }
-        $conn = null;
+        
         }
     }
 ?>
 
         <form action="registration.php" method="post">
-            <label for="fullname">Nom complet</label>
+            <label for="fullname">Fullname</label>
             <input type="text" name="fullname" class="login-input ">
+            <label for="fullname">username</label>
+            <input type="text" name="username" class="login-input ">
             <label for="email">email</label>
             <input type="email" name="email" class="login-input ">
-            <label for="password">Mot de passe</label>
+            <label for="password">Password</label>
             <input type="password" name="password" id="password" class="login-input ">
-            <label for="conf-password">Confirmation de mot de passe</label>
+            <label for="conf-password">Confirm password</label>
             <input type="password" name="conf_password" class="login-input ">
 
-            <input  class="login-button" type="submit" value="Soumettre" name="submit"></button>
-            <a href="login.php">Vous avez deja un compte ?</a>
+            <input  class="login-button" type="submit" value="Submit" name="submit"></button>
+            <a href="login.php">Already have a account, log in ?</a>
 
         </form>
     </div>
-
-    <footer>
-    <?php
-            $myname = "Mohamed Wade";
-            $thisYear = date('Y');
-            echo "$myname &copy $thisYear";
+    <div class="copyright">
+        <?php
+            include('/Applications/MAMP/htdocs/login-pages/include/footer.php');
         ?>
-    </footer>
+    </div>
         
 </body>
     
