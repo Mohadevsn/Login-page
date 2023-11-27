@@ -2,8 +2,6 @@
     session_start();
     define("TITLE", "Welcome Back");
 
-    $name = $_SESSION['fullname'];
-    $email = $_SESSION['email'];
 ?>
 
 
@@ -21,15 +19,13 @@
         <li><a href="default.asp">Home</a></li>
         <li><a href="news.asp">News</a></li>
         <li><a href="contact.asp">Review my personnal infos</a></li>
-        <li><a href="login.php">Disconnection</a></li>
+        <li><a href="login.php" <?php session_destroy() ;?>>Disconnection</a></li>
 </ul>
     <main>
         
         <!-- Welcome Section -->
             <div class="login-container">
                 <h2>Welcome </h2>
-                <p>Hello, <?php echo $name ;?></p>
-                <p>Your email is <?php echo $email;?></p>
             </div>
 
             <div class="copyright">

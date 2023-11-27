@@ -11,10 +11,10 @@ define("TITLE", "Login");
     <title><?php echo TITLE; ?></title>
 </head>
 <body>
-    <div class="nav-bar">
-        <img src="" id="light-dark" alt="">
+    <div class="light-dark">
+        <img src="include/moon.svg" id="light-dark" class="light-dark" alt="" width="30px">
     </div>
-    <div class="login-container">
+    <div id="login-container">
         <?php
         if (isset($_POST['submit'])) {
             $username = $_POST["username"];
