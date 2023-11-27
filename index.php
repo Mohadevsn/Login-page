@@ -2,8 +2,6 @@
     session_start();
     define("TITLE", "Welcome Back");
 
-    $name = $_SESSION['fullname'];
-    $email = $_SESSION['email'];
 ?>
 
 
@@ -28,8 +26,7 @@
         <!-- Welcome Section -->
             <div class="login-container">
                 <h2>Welcome </h2>
-                <p>Hello, <?php echo $name ;?></p>
-                <p>Your email is <?php echo $email;?></p>
+                <p>Hello</p>
             </div>
 
             <div class="copyright">
