@@ -13,7 +13,11 @@
     <title><?php echo TITLE;?></title>
 </head>
 <body>
-    <div class="login-container">
+    <div class="light-dark">
+    <img src="include/moon.svg" id="light-dark" class="light-dark" alt="" width="30px">
+    </div>
+
+    <div id="login-container">
     <?php
 if (isset($_POST['submit'])) {
     $fullname = $_POST['fullname'];
@@ -84,7 +88,7 @@ if (isset($_POST['submit'])) {
     }
 ?>
 
-        <form action="registration.php" method="post">
+        <form action="registration.php" method="post" id="form">
             <label for="fullname">Fullname</label>
             <input type="text" name="fullname" class="login-input ">
             <label for="fullname">username</label>
@@ -106,9 +110,9 @@ if (isset($_POST['submit'])) {
             include('/Applications/MAMP/htdocs/login-pages/include/footer.php');
         ?>
     </div>
+    <script type="text/javascript" src="script.js"></script>
         
 </body>
     
-    <script type="text/javascript" src="scripts.js"></script>
 </html>
 

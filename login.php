@@ -11,6 +11,9 @@ define("TITLE", "Login");
     <title><?php echo TITLE; ?></title>
 </head>
 <body>
+    <div class="nav-bar">
+        <img src="" id="light-dark" alt="">
+    </div>
     <div class="login-container">
         <?php
         if (isset($_POST['submit'])) {
@@ -70,6 +73,6 @@ define("TITLE", "Login");
         include('/Applications/MAMP/htdocs/login-pages/include/footer.php');
         ?>
     </div>
-
+        <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

@@ -16,6 +16,7 @@
     <title><?php echo TITLE; ?></title>
 </head>
 <body>
+    
     <ul>
         <li><a href="default.asp">Home</a></li>
         <li><a href="news.asp">News</a></li>
