@@ -19,7 +19,7 @@
         <li><a href="default.asp">Home</a></li>
         <li><a href="news.asp">News</a></li>
         <li><a href="contact.asp">Review my personnal infos</a></li>
-        <li><a href="login.php" <?php session_destroy() ;?>>Disconnection</a></li>
+        <li><a href="login.php">Disconnection</a></li>
 </ul>
     <main>
         
